@@ -37,7 +37,12 @@ public class ConnectFour {
 		simbolo = stdin.nextInt();
 		
 		
-		
+		//verificação da escolha dos numero para o simbolo, se nao escolheu os numeros certo sai do jogo
+		if(simbolo!=1 || simbolo!=2){
+			System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
+			return;
+		}
+					
 		//escolha dos algoritmos
 		switch(escolha){
 		

@@ -50,6 +50,7 @@ public class Node extends ConnectFour{
 				while(m.matriz[i][j]!="X" || m.matriz[i][j]!="O"){
 					
 					//incompleto
+					//falta saber ao certo as posições do i e do j para mudar o simbolo
 					Node filho = newMatriz(i, j, m);
 					descendentes.addFirst(filho);					
 				}			
@@ -58,15 +59,31 @@ public class Node extends ConnectFour{
 		return descendentes;
 	}
 	
+	
+	//troca o "-" pela jogada do jogador humano ou computador
 	public static Node newMatriz(int i, int j, Node m){
 		
 		//se o jogador for o X
 		if(simbolo==1)
 			m.matriz[i][j]="X";
+		
 		//se o jogador for o O
 		else
-			Node.matriz[i][j]="O";
+			m.matriz[i][j]="O";
 		
 		return m;
+	}
+	
+	
+	//verificacao do tabuleiro estiver completo
+	public static boolean complete(Node m){
+		
+		for(int i=0; i<6; i++){
+			for(int j=0; j<7; j++){
+				if(m.matriz[i][j]=="-")
+					return false;
+			}
+		}
+		return true;
 	}
 }
