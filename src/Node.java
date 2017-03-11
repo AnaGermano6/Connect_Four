@@ -46,7 +46,9 @@ public class Node extends ConnectFour{
 
 		for(int i=0; i<6; i++){
 			for(int j=0; j<7; j++){
+				Node filho = new Node(matriz);
 				
+				descendentes.addFirst(filho);
 				
 				
 			}

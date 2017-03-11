@@ -34,13 +34,34 @@ public class ConnectFour {
 		
 		//escolha do simbolo
 		//1 é sempre o X e o 2 é sempre a bola
-		simbolo = stdin.nextInt();	
+		simbolo = stdin.nextInt();
 		
 		
+		
+		//escolha dos algoritmos
+		switch(escolha){
+		
+			case 1: //Minimax
+			
+					break;
+			case 2: //AlfaBeta
+				
+					break;
+			default: //caso o numero de escolha seja diferente dos valores pedidos para a execucao
+			 		System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
+			 		break;		
+		}
+		
+		
+		
+		//imprimir o tabuleiro
 		switch(jogador){
 		
 			case 1: //imprime a matriz incial toda com tracinhos
 					Node.printMatrizInicial();
+					System.out.println("Escolha a linha e a coluna que pretende jogar");
+					int linha = stdin.nextInt();
+					int coluna = stdin.nextInt();
 					break;
 			case 2: //imprime a mtriz com a jogada do computador
 					
