@@ -78,6 +78,7 @@ public class Tabuleiro extends ConnectFour{
 
     	    	if(matriz[i][j] == "O"){
     	    		contador1++;
+    	    		contador2=0;
     	    		if(contador1 == 4){
     	    			System.out.println("Ganhou o jogador 1!!");
     	    			return true;
@@ -86,6 +87,7 @@ public class Tabuleiro extends ConnectFour{
 
     	    	else if(matriz[i][j] == "X"){
     	    		contador2++;
+    	    		contador1=0;
     	    		if(contador2 == 4){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;
@@ -105,6 +107,7 @@ public class Tabuleiro extends ConnectFour{
     		
     	    	if(matriz[i][j] == "O"){
     	    		contador1++;
+    	    		contador2=0;
     	    		if(contador1 == 4){
     	    			System.out.println("Ganhou o jogador 1!!");
     	    			return true;
@@ -113,6 +116,7 @@ public class Tabuleiro extends ConnectFour{
 
     	    	else if(matriz[i][j] == "X"){
     	    		contador2++;
+    	    		contador1=0;
     	    		if(contador2 == 4){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;
@@ -132,6 +136,7 @@ public class Tabuleiro extends ConnectFour{
 
     	    	if(matriz[i][j] == "O"){
     	    		contador1++;
+    	    		contador2=0;
     	    		if(contador1 == 4){
     	    			System.out.println("Ganhou o jogador 1!!");
     	    			return true;
@@ -140,6 +145,7 @@ public class Tabuleiro extends ConnectFour{
 
     	    	if(matriz[i][j] == "X"){
     	    		contador2++;
+    	    		contador1=0;
     	    		if(contador2 == 4){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;
@@ -159,6 +165,7 @@ public class Tabuleiro extends ConnectFour{
     		
     	    	if(matriz[i][j] == "O"){
     	    		contador1++;
+    	    		contador2=0;
     	    		if(contador1 == 4){
     	    			System.out.println("Ganhou o jogador 1!!");
     	    			return true;
@@ -167,6 +174,7 @@ public class Tabuleiro extends ConnectFour{
 
     	    	if(matriz[i][j] == "X"){
     	    		contador2++;
+    	    		contador1=0;
     	    		if(contador2 == 4){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;

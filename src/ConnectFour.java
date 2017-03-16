@@ -27,6 +27,7 @@ public class ConnectFour {
 		System.out.print("Escolha o adversario que pretende enfrentar:\n" +
 						 "1 -> Outro adversario\n" + "2 -> Computador\n");
 		
+		//escolha do adversario
 		adversario = stdin.nextInt();
 		
 		if(adversario==1){
