@@ -1,12 +1,15 @@
-/*import java.util.*;
+import java.util.*;
 
 public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
 	public static LinkedList<Node> descendentes = new LinkedList<Node>();
+	public static String matriz[][];
+	//public int utility;
+	public int utility;
 	
 	
-	Node(Node m){
-		Node.matriz=m.matriz;
+	Node(String[][] child){
+		Node.matriz=child;
 	}
 
 	public String[][] getMatriz(){
@@ -15,16 +18,18 @@ public class Node extends ConnectFour{
 	
 	
 	//cria os filhos
-	public static LinkedList<Node> makedescendants(Node m){
+	public static LinkedList<Node> makedescendants(String m[][]){
 
-		for(int i=0; i<6; i++){
-			for(int j=0; j<7; j++){
+		for(int j=0; j<7; j++){
+    		//if(j == coluna-1){
+    			for(int i=5; i>=0; i--){
 				//enquanto o tabuleiro nao esta totalmente preenchido
-				if(m.matriz[i][j]!="X" && m.matriz[i][j]!="O"){
+				if(m[i][j]!="X" && m[i][j]!="O"){
 					
 					//incompleto
 					//falta saber ao certo as posições do i e do j para mudar o simbolo
-					Node filho = newMatriz(i, j, m);
+					String child[][] = newMatriz(i, j, m);
+					Node filho = new Node(child);
 					descendentes.addFirst(filho);					
 				}			
 			}
@@ -33,17 +38,12 @@ public class Node extends ConnectFour{
 	}
 	
 	
-	//troca o "-" pela jogada do jogador humano ou computador
-	public static Node newMatriz(int i, int j, Node m){
+	//troca o "-" pela jogada do computador
+	public static String[][] newMatriz(int i, int j, String[][] m){
 		
-		//se o jogador for o X
-		if(simbolo==1)
-			m.matriz[i][j]="X";
-		
-		//se o jogador for o O
-		else
-			m.matriz[i][j]="O";
+		//CPU é o X
+		m[i][j]="X";	
 		
 		return m;
 	}
-}*/
+}

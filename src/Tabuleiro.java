@@ -131,60 +131,35 @@ public class Tabuleiro extends ConnectFour{
     	}
 
     	//verifica se ganhou nalguma diagonal (\)
-    	for(int i=0; i<6; i++){
-    	    for(int j=0; j<7; j++){
-
-    	    	if(matriz[i][j] == "O"){
-    	    		contador1++;
-    	    		contador2=0;
-    	    		if(contador1 == 4){
-    	    			System.out.println("Ganhou o jogador 1!!");
-    	    			return true;
-    	    		}
+    	for(int i=1; i<=6; i++){
+    	    for(int j=4; j<=7; j++){
+    	    	
+    	    	if(matriz[i][j] == "O" && matriz[i-1][j-1]=="O" && matriz[i-2][j-2]=="O" && matriz[i-3][j-3]=="O"){
+	    			System.out.println("Ganhou o jogador 1!!");
+	    			return true;
     	    	}
 
-    	    	if(matriz[i][j] == "X"){
-    	    		contador2++;
-    	    		contador1=0;
-    	    		if(contador2 == 4){
-    	    			System.out.println("Ganhou o jogador 2!!");
-    	    			return true;
-    	    		}
+    	    	if(matriz[i][j] == "X" && matriz[i-1][j-1]=="X" && matriz[i-2][j-2]=="X" && matriz[i-3][j-3]=="X"){
+    	    		System.out.println("Ganhou o jogador 2!!");
+	    			return true;
     	    	}
-    				
-    	    	else {
-    	    		contador1 = 0;
-    	    		contador2 = 0;
-    	    	}
-    	    }
+    	    }    
     	}
 
     	//verifica se ganhou noutra diagonal (/)
-    	for(int i=5; i>=0; i--){
-    	    for(int j=6; j>=0; j--){
-    		
-    	    	if(matriz[i][j] == "O"){
-    	    		contador1++;
-    	    		contador2=0;
-    	    		if(contador1 == 4){
+    	for(int i=1; i<=6; i++){
+    	    for(int j=1; j<=4; j++){
+    	    	
+    	    	if(matriz[i][j] == "O" && matriz[i-1][j+1]=="O" && matriz[i-2][j+2]=="O" && matriz[i-3][j+3]=="O"){
     	    			System.out.println("Ganhou o jogador 1!!");
     	    			return true;
-    	    		}
     	    	}
 
-    	    	if(matriz[i][j] == "X"){
-    	    		contador2++;
-    	    		contador1=0;
-    	    		if(contador2 == 4){
+    	    	if(matriz[i][j] == "X" && matriz[i-1][j+1]=="X" && matriz[i-2][j+2]=="X" && matriz[i-3][j+3]=="X"){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;
-    	    		}
     	    	}
-    				
-    	    	else {
-    	    		contador1 = 0;
-    	    		contador2 = 0;
-    	    	}
+    	    
     	    }
     	}
     	return false;
