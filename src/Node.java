@@ -15,17 +15,27 @@ public class Node extends ConnectFour{
 		return matriz;
 	}
 	
+	public static void printNode(String[][] matriz){
+    	for(int i=0; i<6; i++){
+    		for(int j=0; j<7; j++){
+    			System.out.print(matriz[i][j]);
+    		}
+    		System.out.println();
+    	}
+    }
+	
+	
 	//cria os descendentes
 	public static LinkedList<Node> makedescendants(String m[][], String simbolo){
 
 		for(int j=0; j<7; j++){
-    			//enquanto o tabuleiro nao esta totalmente preenchido
-				if(!isColFull(m)){
-					//o j representa a coluna onde se vai colocar a peca
-					int linha = lastPosition(m, j);
-					Node filho = new Node(newMatriz(linha, j, m, simbolo));
-					descendentes.addFirst(filho);					
-				}
+    		//verifica se a coluna esta cheia 
+			if(!isColFull(m)){
+				//o j representa a coluna onde se vai colocar a peca
+				int linha = lastPosition(m, j);
+				Node filho = new Node(newMatriz(linha, j, m, simbolo));
+				descendentes.addFirst(filho);					
+			}
 		}
 		return descendentes;
 	}
@@ -44,19 +54,20 @@ public class Node extends ConnectFour{
 		
 		//muda nas coordenadas
 		if(simbolo.equals("O"))
-			m[x][y]="O";
+			child[x][y]="O";
 		if(simbolo.equals("X"))
-			m[x][y]="X";
+			child[x][y]="X";
 		
-		return m;
+		return child;
 	}
 	
 	//verifica se a coluna esta cheia
 	public static boolean isColFull(String m[][]){
 		
-		for(int i=0; i<7; i++){
-				if(m[5][i].equals("X") || m[5][i].equals("O"))
-					return true;
+		for(int j=0; j<7; j++){
+			//ultima linha fixa 
+			if(m[5][j].equals("X") || m[5][j].equals("O"))
+				return true;
 		}
 		return false;
 	}
@@ -64,7 +75,7 @@ public class Node extends ConnectFour{
 	//procura a ultima posicao preenchida
 	public static int lastPosition(String m[][], int col){
 		
-		for(int i=6; i < 0; i--){
+		for(int i=6; i<0; i--){
 			if(m[i][col].equals("X") || m[i][col].equals("O"))
 				return i+1;
 		}

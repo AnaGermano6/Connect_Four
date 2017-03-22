@@ -1,47 +1,75 @@
 import java.util.LinkedList;
 
-public class AlfaBeta {
+public class AlfaBeta extends ConnectFour{
+	private final static int MAIS_INF = Integer.MAX_VALUE;
+	private final static int MENOS_INF = Integer.MIN_VALUE;
+	public static LinkedList<Node> list = new LinkedList<Node>();
 	
-	Tabuleiro tab = new Tabuleiro();
-	LinkedList<Node> list = new LinkedList<Node>();
+	//execucao do alfa-beta
+	public static String[][] alphaBetaSearch(String[][] m){
+		
+		int alfa = MENOS_INF;
+		int beta = MAIS_INF;
+		Node child = new Node(m);
+		
+		list = Node.makedescendants(m, "X");
+		
+		while(!list.isEmpty()){
+			child = list.removeFirst();
+			
+			int v = maxValue(child, alfa, beta);
+		}
+		
+		return child.matriz;
+	}
 	
+	//calcula o max
+	public static int maxValue(Node no, int alfa, int beta){
+		int v = MENOS_INF;
+		
+		list = Node.makedescendants(no.matriz, "O");
+		
+		/* TERMINAL
+		if TERMINAL TEST(state) then
+		return UTILITY(state)
+		end if
+		*/
+		
+		while(!list.isEmpty()){
+			Node child = list.removeFirst();
+			
+			 v = Math.max(v,minValue(child, alfa, beta));
+			 
+			 if(v >= alfa) 
+				 //momento da poda
+				 return v;
+			 alfa  = Math.max(alfa, v);
+		}
+		return v;
+	}
 	
-	/*
-	function ALPHA-BETA-SEARCH(state): returns an action
-	inputs: state → estado corrente no jogo
-	v ← MAX-VALUE(state,-inf,+inf)
-	return the action in SUCCESSORS(state) with value v
-	function MAX-VALUE(state,alfa,beta) returns a utility value
-	inputs: state, alfa → melhor alternativa para MAX, beta → melhor alternativa para MIN
-	if TERMINAL TEST(state) then
-	return UTILITY(state)
-	end if
-	v ← -infinito
-	for s in SUCCESSORS(state) do
-	v ← MAX(v, MIN-VALUE(s,alfa,beta))
-	if (v >= beta ) then
-	return v // momento da poda
-	end if
-	alfa ← MAX(alfa,v)
-	end for
-	return v
-	function MIN-VALUE(state,alfa,beta) returns a utility value
-	if TERMINAL TEST(state) then
-	return UTILITY(state)
-	end if
-	v ← +infinito
-	for s in SUCCESSORS(state) do
-	v ← MIN(v, MAX-VALUE(s,alfa,beta))
-	if (v <= alfa ) then
-	return v // momento da poda
-	end if
-	beta ← MIN(beta,v)
-	end for
-	return v
-	 */
-	
-	
-	
-	
-
+	//calcula min
+	public static int minValue(Node no, int alfa, int beta){
+		int v = MAIS_INF;
+		
+		list = Node.makedescendants(no.matriz, "O");
+		
+		/* TERMINAL
+		if TERMINAL TEST(state) then
+		return UTILITY(state)
+		end if
+		*/
+		
+		while(!list.isEmpty()){
+			Node child = list.removeFirst();
+			
+			 v = Math.max(v,maxValue(child, alfa, beta)); 
+			 
+			 if(v<=alfa) 
+				 //momento da poda
+				 return v; 
+			 beta = Math.min(beta, v);
+		}
+		return v;
+	}
 }

@@ -168,18 +168,18 @@ public class ConnectFour {
 	
 	//vez do computador jogar
 	public static void computer(){
-		//escolha dos algoritmos
-		switch(escolha){
-	
-			case 1: //Minimax
-				Minimax.decision(tab.matriz);
-				break;
-			case 2: //AlfaBeta
 		
-				break;		
+		//escolha dos algoritmos
+		if(escolha==1){ //Minimax
+			Minimax.decisionMinimax(tab.matriz);
+			tab.print();
+		}
+		else{ //AlfaBeta
+			//AlfaBeta.alphaBetaSearch(tab.matriz);
+			//tab.print();
+							
 		}
 		
-		
-		
+			
 	}
 }
