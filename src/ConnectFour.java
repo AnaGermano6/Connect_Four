@@ -171,11 +171,13 @@ public class ConnectFour {
 		
 		//escolha dos algoritmos
 		if(escolha==1){ //Minimax
-			Minimax.decisionMinimax(tab.matriz);
+			int play = Minimax.decisionMinimax(tab.matriz);
+			tab.altera("X", play);
 			tab.print();
 		}
 		else{ //AlfaBeta
-			//AlfaBeta.alphaBetaSearch(tab.matriz);
+			//int play = AlfaBeta.alphaBetaSearch(tab.matriz);
+			//tab.altera("X", play);
 			//tab.print();
 							
 		}

@@ -4,6 +4,7 @@ public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
 	public static LinkedList<Node> descendentes = new LinkedList<Node>();
 	public static String matriz[][];
+	public static int col;
 
 	
 	Node(String[][] child){

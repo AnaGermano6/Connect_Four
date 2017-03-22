@@ -6,7 +6,7 @@ public class AlfaBeta extends ConnectFour{
 	public static LinkedList<Node> list = new LinkedList<Node>();
 	
 	//execucao do alfa-beta
-	public static String[][] alphaBetaSearch(String[][] m){
+	public static int alphaBetaSearch(String[][] m){
 		
 		int alfa = MENOS_INF;
 		int beta = MAIS_INF;
@@ -18,9 +18,12 @@ public class AlfaBeta extends ConnectFour{
 			child = list.removeFirst();
 			
 			int v = maxValue(child, alfa, beta);
+			
+			
+			//guardar coluna
 		}
 		
-		return child.matriz;
+		return Node.col;
 	}
 	
 	//calcula o max

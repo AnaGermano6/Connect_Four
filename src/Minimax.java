@@ -6,7 +6,7 @@ public class Minimax extends ConnectFour{
 	public static LinkedList<Node> list = new LinkedList<Node>();
 	
 	//execucao do Minimax
-	public static String[][] decisionMinimax(String m[][]){
+	public static int decisionMinimax(String m[][]){
 		
 		//gera os filhos
 		list = Node.makedescendants(m, "X"); 
@@ -20,8 +20,10 @@ public class Minimax extends ConnectFour{
 			
 			// calcula o valor da utilidade e depois guarda o valor
             v = Math.max(v,minValue(child)); 
+            
+            //guardar a coluna
 		}
-		return child.matriz;
+		return Node.col;
 	}
 
 	//calcula o max
