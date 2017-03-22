@@ -7,7 +7,6 @@ public class Minimax extends ConnectFour{
 	//static Tabuleiro tab = new Tabuleiro();
 	public static LinkedList<Node> list = new LinkedList<Node>();
 	
-	
 	/*
 	function MINIMAX DECISION(state): returns an action
 	inputs: state → estado corrente no jogo
@@ -29,7 +28,7 @@ public class Minimax extends ConnectFour{
 	return UTILITY(state)
 	end if
 	v ← infinito
-	for s in SUCCESSORS(state) do
+	for s in SUCCESSORS(state) do 
 	v ← MIN(v, MAX-VALUE(s))
 	end for
 	return v*/
@@ -39,11 +38,11 @@ public class Minimax extends ConnectFour{
 	public static Node decision(String m[][]){
 		
 		//gera os filhos
-		list = Node.makedescendants(m); 
+		list = Node.makedescendants(m, "X"); 
 		
 		int v = MAIS_INF;
 		
-	/*	while(!list.isEmpty()){
+		/*	while(!list.isEmpty()){
 			Node child = list.removeFirst();*/
 			
 			for(Node child : list){
@@ -65,7 +64,7 @@ public class Minimax extends ConnectFour{
 		//terminal
 		//if(tab.cheio() || tab.quemGanhou()) //?????
 		//	return no.utility;
-		for(Node child : Node.makedescendants(no.matriz)){ //Para cada no gerado do utilizador vai guardar o valor minimo entre a utilidade do utilizador com a do CPU
+		for(Node child : Node.makedescendants(no.matriz, "O")){ //Para cada no gerado do utilizador vai guardar o valor minimo entre a utilidade do utilizador com a do CPU
             v = Math.min(v,min(child));
             child.utility = v; // guarda esse valor 
         }		
@@ -78,7 +77,7 @@ public class Minimax extends ConnectFour{
 		
 		//terminal ???
 		
-		for(Node child : Node.makedescendants(no.matriz)){ //Para cada no gerado do utilizador vai guardar o valor minimo entre a utilidade do utilizador com a do CPU
+		for(Node child : Node.makedescendants(no.matriz, "X")){ //Para cada no gerado do utilizador vai guardar o valor minimo entre a utilidade do utilizador com a do CPU
             v = Math.min(v,max(child));
             child.utility = v; // guarda esse valor 
         }

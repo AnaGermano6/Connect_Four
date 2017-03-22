@@ -51,6 +51,7 @@ public class ConnectFour {
 			inicia = stdin.nextInt();
 			
 			System.out.println("O jogador vai jogar com o símbolo O e o computador com o símbolo X");
+			System.out.println();
 		}
 		else{
 			System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
@@ -86,13 +87,19 @@ public class ConnectFour {
 		}
 		else{
 			if(inicia==1){//pessoa
-				jog1();
-				computer();
+				while(true){
+				
+					jog1();
+					computer();
+				
+				}
 				
 			}else if(inicia==2){//computador
+				while(true){
 				
-				computer();
-				jog1();			
+					computer();
+					jog1();	
+				}
 			}
 			else{
 				System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
