@@ -17,13 +17,6 @@ public class ConnectFour {
 	public static void instrucoes(){
 		Scanner stdin = new Scanner(System.in);
 		
-		//leitura da consola
-		System.out.print("Escolha o algoritmo que pretende usar:\n" +
-						 "1 -> Minimax\n" + "2 -> AlfaBeta\n");
-		
-		//escolha do algoritmo
-		escolha = stdin.nextInt(); 
-		
 		System.out.print("Escolha o adversario que pretende enfrentar:\n" +
 						 "1 -> Outro adversario\n" + "2 -> Computador\n");
 		
@@ -40,13 +33,24 @@ public class ConnectFour {
 			System.out.println();
 		}
 		else if(adversario==2){
+			//leitura da consola
+			System.out.print("Escolha o algoritmo que pretende usar:\n" +
+							 "1 -> Minimax\n" + "2 -> AlfaBeta\n");
+			
+			//escolha do algoritmo
+			escolha = stdin.nextInt();
+			
+			if(escolha!=1 && escolha!=2){ //caso o numero de escolha seja diferente dos valores pedidos para a execucao
+				System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
+				return;
+			}
+			
 			System.out.print("Escolha o jogador que inicia o jogo\n" + 
-						     "1 -> Humano\n" + "2 -> Computador\n");
+						     "1 -> Pessoa\n" + "2 -> Computador\n");
 			
 			inicia = stdin.nextInt();
 			
 			System.out.println("O jogador vai jogar com o símbolo O e o computador com o símbolo X");
-			
 		}
 		else{
 			System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
@@ -61,20 +65,6 @@ public class ConnectFour {
 		tab = new Tabuleiro();
 		tab.print();
 							
-		//escolha dos algoritmos
-		switch(escolha){
-		
-			case 1: //Minimax
-			
-					break;
-			case 2: //AlfaBeta
-				
-					break;
-			default: //caso o numero de escolha seja diferente dos valores pedidos para a execucao
-			 		System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
-			 		break;		
-		}
-		
 		//Comeca o jogo, no caso de ser duas pessoas
 		if(adversario==1){
 		
@@ -95,10 +85,19 @@ public class ConnectFour {
 			}
 		}
 		else{
-			jog1();
-			//parte de por o computador a jogar
-			
-			
+			if(inicia==1){//pessoa
+				jog1();
+				computer();
+				
+			}else if(inicia==2){//computador
+				
+				computer();
+				jog1();			
+			}
+			else{
+				System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
+				return; 
+			}
 		}
 	}
 	
@@ -158,5 +157,22 @@ public class ConnectFour {
 		    tab.altera("X", coluna);
 		    tab.print();
 		}
-	}	
+	}
+	
+	//vez do computador jogar
+	public static void computer(){
+		//escolha dos algoritmos
+		switch(escolha){
+	
+			case 1: //Minimax
+				Minimax.decision(tab.matriz);
+				break;
+			case 2: //AlfaBeta
+		
+				break;		
+		}
+		
+		
+		
+	}
 }
