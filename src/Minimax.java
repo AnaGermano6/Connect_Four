@@ -20,7 +20,6 @@ public class Minimax extends ConnectFour{
 			
 			// calcula o valor da utilidade e depois guarda o valor
             v = Math.max(v,minValue(child)); 
-           // child.utility = v;
 		}
 		return child.matriz;
 	}
@@ -42,7 +41,7 @@ public class Minimax extends ConnectFour{
 			
 			// calcula o valor da utilidade e depois guarda o valor
             v = Math.min(v,minValue(child));
-            child.utility = v; 
+          
         }		
 		return v;
 	}
@@ -64,7 +63,6 @@ public class Minimax extends ConnectFour{
 		
 			// calcula o valor da utilidade e depois guarda o valor
             v = Math.min(v,maxValue(child));
-            child.utility = v; 
         }
 		return v;
 		

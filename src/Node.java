@@ -4,27 +4,20 @@ public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
 	public static LinkedList<Node> descendentes = new LinkedList<Node>();
 	public static String matriz[][];
-	public int utility;
-	
+
 	
 	Node(String[][] child){
 		Node.matriz=child;
 	}
 
+	public static void setMatriz(String[][] matriz) {
+		Node.matriz = matriz;
+	}
+
 	public String[][] getMatriz(){
 		return matriz;
 	}
-	
-	public static void printNode(String[][] matriz){
-    	for(int i=0; i<6; i++){
-    		for(int j=0; j<7; j++){
-    			System.out.print(matriz[i][j]);
-    		}
-    		System.out.println();
-    	}
-    }
-	
-	
+		
 	//cria os descendentes
 	public static LinkedList<Node> makedescendants(String m[][], String simbolo){
 
