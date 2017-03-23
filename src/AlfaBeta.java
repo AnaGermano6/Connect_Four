@@ -7,23 +7,26 @@ public class AlfaBeta extends ConnectFour{
 	
 	//execucao do alfa-beta
 	public static int alphaBetaSearch(String[][] m){
+		int col=0;
 		
 		int alfa = MENOS_INF;
 		int beta = MAIS_INF;
-		Node child = new Node(m);
+		int v = MENOS_INF;
 		
 		list = Node.makedescendants(m, "X");
 		
 		while(!list.isEmpty()){
-			child = list.removeFirst();
+			Node child = list.removeFirst();
 			
-			int v = maxValue(child, alfa, beta);
+			int val = maxValue(child, alfa, beta);
 			
-			
-			//guardar coluna
-		}
-		
-		return Node.col;
+			if(val>v){
+            	v=val;
+            	col=Node.coluna;
+            	
+            }
+        }
+		return col;
 	}
 	
 	//calcula o max

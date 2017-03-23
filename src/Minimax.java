@@ -7,23 +7,26 @@ public class Minimax extends ConnectFour{
 	
 	//execucao do Minimax
 	public static int decisionMinimax(String m[][]){
-		
+		int col=0;
 		//gera os filhos
 		list = Node.makedescendants(m, "X"); 
 		
-		int v = MAIS_INF;
-		Node child = new Node(m);
+		int v = MENOS_INF;
 		
 		//verifica para cada no da lista dos descendentes 
 		while(!list.isEmpty()){
-			child = list.removeFirst();
+			Node child = list.removeFirst();
 			
 			// calcula o valor da utilidade e depois guarda o valor
-            v = Math.max(v,minValue(child)); 
+            int val = Math.max(v,minValue(child)); 
             
-            //guardar a coluna
-		}
-		return Node.col;
+            if(val>v){
+            	v=val;
+            	col=Node.coluna;
+            	
+            }
+        }
+		return col;
 	}
 
 	//calcula o max
