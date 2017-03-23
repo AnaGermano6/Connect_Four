@@ -13,7 +13,9 @@ public class AlfaBeta extends ConnectFour{
 		int beta = MAIS_INF;
 		int v = MENOS_INF;
 		
-		list = Node.makedescendants(m, "X");
+		Node n = new Node(m,0);
+		
+		list = Node.makedescendants(n, "X");
 		
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();
@@ -33,13 +35,11 @@ public class AlfaBeta extends ConnectFour{
 	public static int maxValue(Node no, int alfa, int beta){
 		int v = MENOS_INF;
 		
-		list = Node.makedescendants(no.matriz, "O");
+		//terminal
+		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
+			return Node.utility(no);
 		
-		/* TERMINAL
-		if TERMINAL TEST(state) then
-		return UTILITY(state)
-		end if
-		*/
+		list = Node.makedescendants(no, "O"); 
 		
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();
@@ -58,13 +58,11 @@ public class AlfaBeta extends ConnectFour{
 	public static int minValue(Node no, int alfa, int beta){
 		int v = MAIS_INF;
 		
-		list = Node.makedescendants(no.matriz, "O");
+		//terminal
+		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
+			return Node.utility(no);
 		
-		/* TERMINAL
-		if TERMINAL TEST(state) then
-		return UTILITY(state)
-		end if
-		*/
+		list = Node.makedescendants(no, "O"); 
 		
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();

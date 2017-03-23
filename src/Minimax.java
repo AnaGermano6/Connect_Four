@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.*;
 
 public class Minimax extends ConnectFour{
 	private final static int MAIS_INF = Integer.MAX_VALUE;
@@ -8,8 +8,10 @@ public class Minimax extends ConnectFour{
 	//execucao do Minimax
 	public static int decisionMinimax(String m[][]){
 		int col=0;
+		
+		Node n = new Node(m,0);
 		//gera os filhos
-		list = Node.makedescendants(m, "X"); 
+		list = Node.makedescendants(n, "X"); 
 		
 		int v = MENOS_INF;
 		
@@ -34,12 +36,11 @@ public class Minimax extends ConnectFour{
 		
 		int v = MENOS_INF;
 		
-		list = Node.makedescendants(no.matriz, "O"); 
+		//terminal
+		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
+			return Node.utility(no);
 		
-		//terminal???
-		/*f TERMINAL TEST(state) then
-		return UTILITY(state)
-		end if*/
+		list = Node.makedescendants(no, "X"); 
 		
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();
@@ -55,13 +56,12 @@ public class Minimax extends ConnectFour{
 	public static int minValue(Node no){
 		
 		int v = MAIS_INF;
+
+		//terminal
+		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
+			return Node.utility(no);
 		
-		list = Node.makedescendants(no.matriz, "O"); 
-		
-		//terminal???
-		/*if TERMINAL TEST(state) then
-		return UTILITY(state)
-		end if*/
+		list = Node.makedescendants(no, "O"); 
 		
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();
