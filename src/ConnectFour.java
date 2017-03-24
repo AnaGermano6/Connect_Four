@@ -50,7 +50,7 @@ public class ConnectFour {
 			
 			inicia = stdin.nextInt();
 			
-			System.out.println("O jogador vai jogar com o símbolo O e o computador com o símbolo X");
+			System.out.println("O jogador vai jogar com o símbolo O e o computador (jogador 2) com o símbolo X");
 			System.out.println();
 		}
 		else{
@@ -178,15 +178,16 @@ public class ConnectFour {
 	
 	//vez do computador jogar
 	public static void computer(){
-		System.out.println("escolha " + escolha);
+		int play;
+		//System.out.println("escolha " + escolha);
 		//escolha dos algoritmos
 		if(escolha==1){ //Minimax
-			int play = Minimax.decisionMinimax(tab.matriz);
+			play = Minimax.decisionMinimax(tab.matriz);
 			tab.altera("X", play);
 			tab.print();
 		}
 		else{ //AlfaBeta
-			//int play = AlfaBeta.alphaBetaSearch(tab.matriz);
+			//play = AlfaBeta.alphaBetaSearch(tab.matriz);
 			//tab.altera("X", play);
 			//tab.print();
 							

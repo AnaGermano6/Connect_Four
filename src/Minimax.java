@@ -16,16 +16,14 @@ public class Minimax extends ConnectFour{
 		int v = MENOS_INF;
 		
 		//verifica para cada no da lista dos descendentes 
-		while(!list.isEmpty()){
-			Node child = list.removeFirst();
-			//Node.printM(child);
-			//System.out.println();
+		for(Node child : list ){
 			
 			// calcula o valor da utilidade e depois guarda o valor
             int val = minValue(child); 
-            
+            System.out.println(child.depth + " " + val);
             if(val>v){
             	v=val;
+            	System.out.println("ESCOLHI " + col);
             	col=Node.coluna;
             	
             }
@@ -39,16 +37,18 @@ public class Minimax extends ConnectFour{
 		int v = MENOS_INF;
 		
 		//terminal
-		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
+		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no))){
+			System.out.println("utility" + Node.utility(no));
 			return Node.utility(no);
-		
+		}
 		list = Node.makedescendants(no, "X"); 
-		
-		while(!list.isEmpty()){
-			Node child = list.removeFirst();
-			
+		for(Node child : list ){
+
+			Node.printM(child);
+			System.out.println("depth " + child.depth);
 			// calcula o valor da utilidade e depois guarda o valor
             v = Math.max(v, minValue(child));
+            
           
         }		
 		return v;
@@ -60,14 +60,18 @@ public class Minimax extends ConnectFour{
 		int v = MAIS_INF;
 
 		//terminal
-		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
+		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no))){
+			System.out.println("utility" + Node.utility(no));
 			return Node.utility(no);
+		}
+		
 		
 		list = Node.makedescendants(no, "O"); 
 		
-		while(!list.isEmpty()){
-			Node child = list.removeFirst();
-		
+		for(Node child : list ){
+			Node.printM(child);
+			System.out.println("depth " + child.depth);
+			
 			// calcula o valor da utilidade e depois guarda o valor
             v = Math.min(v, maxValue(child));
         }

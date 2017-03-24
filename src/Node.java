@@ -2,9 +2,9 @@ import java.util.*;
 
 public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
-	private static String matriz[][];
+	private String matriz[][];
 	public static int coluna;
-	public static int depth;
+	public int depth;
 	public Node pai;
 
 	
@@ -15,51 +15,55 @@ public class Node extends ConnectFour{
 	}
 	
 	Node(Node other){
-		this.matriz=other.matriz;
+		this.matriz=other.getMatriz();
 	}
 	
 	
-	public static int getColuna() {
+	public int getColuna() {
 		return coluna;
 	}
 
-	public static void setColuna(int coluna) {
-		Node.coluna = coluna;
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
 	}
 
-	public static int getDepth() {
+	public int getDepth() {
 		return depth;
 	}
 
-	public static void setDepth(int depth) {
-		Node.depth = depth;
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
 
-	public static void setMatriz(String[][] matriz) {
-		Node.matriz = matriz;
+	public void setMatriz(String[][] matriz) {
+		this.matriz = matriz;
 	}
 
 	public String[][] getMatriz(){
-		return matriz;
+		String [][] res = new String[6][];
+		for (int i = 0; i < 6; i++) 
+			res[i] = Arrays.copyOf(this.matriz[i], 6);
+		return res;
 	}
 		
 	//cria os descendentes
 	public static LinkedList<Node> makedescendants(Node m, String simbolo){
 		LinkedList<Node> descendentes = new LinkedList<Node>();
-
+		int linha;
 		for(int j=0; j<7; j++){
     		//verifica se a coluna esta cheia 
 			if(!isColFull(m.matriz, j)){
 				//o j representa a coluna onde se vai colocar a peca
-				int linha = lastPosition(m.matriz, j);
+				linha = lastPosition(m.matriz, j);
 				if(linha!=-1){
 					Node filho = newMatriz(linha, j, m, simbolo);
 					descendentes.add(filho);
 				}
-				m.matriz[linha][j]="-";
+				//m.matriz[linha][j]="-";
 			}
 			
 		}
+		
 		return descendentes;
 	}
 	
@@ -75,7 +79,7 @@ public class Node extends ConnectFour{
 	public static int lastPosition(String m[][], int col){
 		
 		for(int i=5; i>=0; i--){
-			if(m[i][col].equals("-"))
+			if(!m[i][col].equals("X") && !m[i][col].equals("O"))
 				//posicao para colocar a peca
 				return i;
 		}
@@ -87,15 +91,11 @@ public class Node extends ConnectFour{
 	public static Node newMatriz(int x, int y, Node m, String simbolo){
 		String[][] child= new String[6][7];
 		
-		printM(m);
-		
 		//cria a nova matriz igual a anterior
 		for(int i=0; i<6; i++){
 			for(int j=0; j<7; j++){
 				child[i][j]=m.matriz[i][j];
-			//	System.out.print(child[i][j]);
 			}
-			//System.out.println();
 		}
 		
 		
@@ -105,9 +105,7 @@ public class Node extends ConnectFour{
 		//adiciona mais 1 nivel ao no pai
 		Node copyM = new Node(child, m.depth+1);
 		copyM.pai=m;
-		//printM(copyM);
-		//System.out.println();
-		
+				
 		return copyM;
 	}
 	
@@ -127,6 +125,8 @@ public class Node extends ConnectFour{
     	    		}
     	    	}
     	    	sum+= soma(contaX, contaO);
+    	    	contaX=0;
+    	    	contaO=0;
     	    }
 		}
 
@@ -142,6 +142,8 @@ public class Node extends ConnectFour{
 		    		}
 		    	}
 		    	sum+= soma(contaX, contaO);
+    	    	contaX=0;
+    	    	contaO=0;
 		    }
 		}
 
@@ -157,6 +159,8 @@ public class Node extends ConnectFour{
 		    		}
 		    	}
 		    	sum+= soma(contaX, contaO);
+    	    	contaX=0;
+    	    	contaO=0;
 		    }
 		}
 
@@ -172,6 +176,8 @@ public class Node extends ConnectFour{
 		    		}
 		    	}
 			sum+= soma(contaX, contaO);
+	    	contaX=0;
+	    	contaO=0;
 		    }
 		}
 		return sum;
@@ -292,8 +298,8 @@ public class Node extends ConnectFour{
 		for(int i=0; i<3; i++){
 	    	for(int j=0; j<4; j++){
 
-	    		if(matriz[i][j].equals("O") && matriz[i+1][j+1].equals("O") && 
-	    				matriz[i+2][j+2].equals("O") && matriz[i+3][j+3].equals("O")){
+	    		if(m.matriz[i][j].equals("O") && m.matriz[i+1][j+1].equals("O") && 
+	    				m.matriz[i+2][j+2].equals("O") && m.matriz[i+3][j+3].equals("O")){
 	    			return true;
 	    		}
 		    }
@@ -302,8 +308,8 @@ public class Node extends ConnectFour{
 		for(int i=3; i<6; i++){
 	    	for(int j=0; j<4; j++){
 
-	    		if(matriz[i][j].equals("O") && matriz[i-1][j+1].equals("O") && 
-	    				matriz[i-2][j+2].equals("O") && matriz[i-3][j+3].equals("O")){
+	    		if(m.matriz[i][j].equals("O") && m.matriz[i-1][j+1].equals("O") && 
+	    				m.matriz[i-2][j+2].equals("O") && m.matriz[i-3][j+3].equals("O")){
 	    			return true;
 	    		}
 		    }
@@ -331,7 +337,7 @@ public class Node extends ConnectFour{
 	
 	
 	public static boolean isFinal(Node matriz){
-		if(matriz.depth == 5)
+		if(matriz.depth == 3)
 		    return true;
 
 		return false;
@@ -345,5 +351,4 @@ public class Node extends ConnectFour{
     		System.out.println();
     	}
     }
-
 }

@@ -1,6 +1,6 @@
 
 public class Tabuleiro extends ConnectFour{
-	public static String[][] matriz = new String[6][7];
+	public String[][] matriz = new String[6][7];
 	
 	//inicia o tabuleiro 
     Tabuleiro(){
@@ -8,13 +8,13 @@ public class Tabuleiro extends ConnectFour{
 		for(int i=0; i<6; i++){
 		    for(int j=0; j<7; j++){
 		    	matriz[i][j]="-";
-		    }
+		    }   
 		}
 	}
     
     
     //imprime a matriz
-    public static void print(){
+    public void print(){
     	for(int i=0; i<6; i++){
     		for(int j=0; j<7; j++){
     			System.out.print(matriz[i][j]);
@@ -25,7 +25,7 @@ public class Tabuleiro extends ConnectFour{
 
     
     //altera na matriz as jogadas 
-    public static void altera(String simbolo, int coluna){
+    public void altera(String simbolo, int coluna){
 
     	int i;
 	
@@ -48,7 +48,7 @@ public class Tabuleiro extends ConnectFour{
 
     
     //verifica se o tabuleiro esta cheio, para caso de empate
-    public static boolean cheio(){
+    public boolean cheio(){
 
     	int contador = 0;
 	
@@ -68,7 +68,7 @@ public class Tabuleiro extends ConnectFour{
     }
     
     //verifica o vencedor
-    public static boolean quemGanhou(){
+    public boolean quemGanhou(){
 
     	int contador1 = 0, contador2 = 0;
 
