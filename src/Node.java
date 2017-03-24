@@ -2,8 +2,7 @@ import java.util.*;
 
 public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
-	public static LinkedList<Node> descendentes = new LinkedList<Node>();
-	public static String matriz[][];
+	private static String matriz[][];
 	public static int coluna;
 	public static int depth;
 	public Node pai;
@@ -13,6 +12,10 @@ public class Node extends ConnectFour{
 		this.matriz=child;
 		this.depth=depth;
 		this.pai=null;
+	}
+	
+	Node(Node other){
+		this.matriz=other.matriz;
 	}
 	
 	
@@ -42,16 +45,20 @@ public class Node extends ConnectFour{
 		
 	//cria os descendentes
 	public static LinkedList<Node> makedescendants(Node m, String simbolo){
+		LinkedList<Node> descendentes = new LinkedList<Node>();
 
 		for(int j=0; j<7; j++){
     		//verifica se a coluna esta cheia 
 			if(!isColFull(m.matriz, j)){
 				//o j representa a coluna onde se vai colocar a peca
 				int linha = lastPosition(m.matriz, j);
-				Node filho = newMatriz(linha, j, m, simbolo);
-				print(filho);
-				descendentes.add(filho);					
+				if(linha!=-1){
+					Node filho = newMatriz(linha, j, m, simbolo);
+					descendentes.add(filho);
+				}
+				m.matriz[linha][j]="-";
 			}
+			
 		}
 		return descendentes;
 	}
@@ -59,7 +66,7 @@ public class Node extends ConnectFour{
 	//verifica se a coluna esta cheia
 	public static boolean isColFull(String m[][], int col){
 		//ultima linha fixa 
-		if(m[5][col].equals("X") || m[5][col].equals("O"))
+		if(m[0][col].equals("X") || m[0][col].equals("O"))
 			return true;
 		return false;
 	}
@@ -67,12 +74,12 @@ public class Node extends ConnectFour{
 	//procura a ultima posicao preenchida
 	public static int lastPosition(String m[][], int col){
 		
-		for(int i=6; i>0; i--){
-			if(m[i][col].equals("X") || m[i][col].equals("O"))
+		for(int i=5; i>=0; i--){
+			if(m[i][col].equals("-"))
 				//posicao para colocar a peca
-				return i+1;
+				return i;
 		}
-		return 0;
+		return -1;
 	}
 	
 	
@@ -80,18 +87,26 @@ public class Node extends ConnectFour{
 	public static Node newMatriz(int x, int y, Node m, String simbolo){
 		String[][] child= new String[6][7];
 		
+		printM(m);
+		
 		//cria a nova matriz igual a anterior
 		for(int i=0; i<6; i++){
 			for(int j=0; j<7; j++){
 				child[i][j]=m.matriz[i][j];
+			//	System.out.print(child[i][j]);
 			}
+			//System.out.println();
 		}
 		
-		child[x][y]=simbolo;		
+		
+		child[x][y]=simbolo;
+		coluna=y;
 		
 		//adiciona mais 1 nivel ao no pai
 		Node copyM = new Node(child, m.depth+1);
 		copyM.pai=m;
+		//printM(copyM);
+		//System.out.println();
 		
 		return copyM;
 	}
@@ -239,11 +254,11 @@ public class Node extends ConnectFour{
 		return false;
 	 }
 
-	
+	//quando o computador perde
 	 public static boolean jaPerdi(Node m){
 
 		int contaO = 0;
-		
+		//horizontais
 		for(int i=0; i<6; i++){
 	   	    for(int j=0; j<7; j++){
 
@@ -258,7 +273,7 @@ public class Node extends ConnectFour{
 	   	    }
 		    contaO = 0;
 		}
-
+		//verticais
 		for(int j=0; j<7;j++){
 	        for(int i=0; i<6; i++){
 	    		
@@ -273,7 +288,7 @@ public class Node extends ConnectFour{
 		    }
 		    contaO = 0;
 		}
-		
+		//diagonais
 		for(int i=0; i<3; i++){
 	    	for(int j=0; j<4; j++){
 
@@ -283,7 +298,7 @@ public class Node extends ConnectFour{
 	    		}
 		    }
 		}
-
+		//diagonais
 		for(int i=3; i<6; i++){
 	    	for(int j=0; j<4; j++){
 
@@ -302,7 +317,7 @@ public class Node extends ConnectFour{
 		
     	for(int i=0; i<6; i++){
     		for(int j=0; j<7; j++){
-    			if(m.matriz[i][j] != "-")
+    			if(!m.matriz[i][j].equals("-"))
     				contador++;
     		}
     	}
@@ -322,13 +337,13 @@ public class Node extends ConnectFour{
 		return false;
 	}
 	
-	 public static void print(Node m){
-	    	for(int i=0; i<6; i++){
-	    		for(int j=0; j<7; j++){
-	    			System.out.print(m.matriz[i][j]);
-	    		}
-	    		System.out.println();
-	    	}
-	    }
+	 public static void printM(Node m){
+    	for(int i=0; i<6; i++){
+    		for(int j=0; j<7; j++){
+    			System.out.print(m.matriz[i][j]);
+    		}
+    		System.out.println();
+    	}
+    }
 
 }

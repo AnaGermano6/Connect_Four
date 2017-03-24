@@ -18,6 +18,8 @@ public class Minimax extends ConnectFour{
 		//verifica para cada no da lista dos descendentes 
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();
+			//Node.printM(child);
+			//System.out.println();
 			
 			// calcula o valor da utilidade e depois guarda o valor
             int val = minValue(child); 

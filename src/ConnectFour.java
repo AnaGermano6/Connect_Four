@@ -91,6 +91,11 @@ public class ConnectFour {
 				
 					jog1();
 					computer();
+					
+					if(tab.quemGanhou() || tab.cheio()) {
+						System.out.println("Acabou o jogo!");
+						break;
+					}
 				
 				}
 				
@@ -99,6 +104,11 @@ public class ConnectFour {
 				
 					computer();
 					jog1();	
+					
+					if(tab.quemGanhou() || tab.cheio()) {
+						System.out.println("Acabou o jogo!");
+						break;
+					}
 				}
 			}
 			else{
@@ -168,7 +178,7 @@ public class ConnectFour {
 	
 	//vez do computador jogar
 	public static void computer(){
-		
+		System.out.println("escolha " + escolha);
 		//escolha dos algoritmos
 		if(escolha==1){ //Minimax
 			int play = Minimax.decisionMinimax(tab.matriz);
