@@ -4,14 +4,16 @@ public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
 	private String matriz[][];
 	public static int coluna;
+	public static int utilidade;
 	public int depth;
 	public Node pai;
 
 	
-	Node(String[][] child, int depth, int coluna){
+	Node(String[][] child, int depth, int coluna, int utilidade){
 		this.matriz=child;
 		this.depth=depth;
 		this.coluna=coluna;
+		this.utilidade=utilidade;
 		this.pai=null;
 	}
 	
@@ -19,7 +21,7 @@ public class Node extends ConnectFour{
 		this.matriz=other.getMatriz();
 	}
 	
-	
+
 	public int getColuna() {
 		return coluna;
 	}
@@ -103,7 +105,7 @@ public class Node extends ConnectFour{
 		child[x][y]=simbolo;
 		
 		//adiciona mais 1 nivel ao no pai
-		Node copyM = new Node(child, m.depth+1, y);
+		Node copyM = new Node(child, m.depth+1, y, utilidade);
 		copyM.pai=m;
 				
 		return copyM;

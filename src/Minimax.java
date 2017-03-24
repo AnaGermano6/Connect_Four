@@ -7,9 +7,8 @@ public class Minimax extends ConnectFour{
 	
 	//execucao do Minimax
 	public static int decisionMinimax(String m[][]){
-		int col=0;
-		
-		Node n = new Node(m,0,0);
+				
+		Node n = new Node(m,0,0,0);
 		//gera os filhos
 		list = Node.makedescendants(n, "X"); 
 		
@@ -23,12 +22,18 @@ public class Minimax extends ConnectFour{
             System.out.println(child.depth + " " + val);
             if(val>v){
             	v=val;
-            	System.out.println("ESCOLHI " + col);
-            	col=Node.coluna;
-            	
+            	child.utilidade=v;          	
+            }
+		}
+		
+		for(Node child : list){
+            
+            if(child.utilidade==v){
+            	System.out.println("ESCOLHI " + child.coluna);  
+            	return child.coluna+1;  
             }
         }
-		return col+1;
+		return -1;
 	}
 
 	//calcula o max

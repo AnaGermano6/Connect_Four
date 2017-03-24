@@ -13,19 +13,16 @@ public class AlfaBeta extends ConnectFour{
 		int beta = MAIS_INF;
 		int v = MENOS_INF;
 		
-		Node n = new Node(m,0,0);
+		Node n = new Node(m,0,0,0);
 		
 		list = Node.makedescendants(n, "X");
 		
-		while(!list.isEmpty()){
-			Node child = list.removeFirst();
-			
+		for(Node child : list ){
+						
 			int val = maxValue(child, alfa, beta);
 			
 			if(val>v){
             	v=val;
-            //	col=Node.coluna;
-            	
             }
         }
 		return col;
@@ -41,9 +38,8 @@ public class AlfaBeta extends ConnectFour{
 		
 		list = Node.makedescendants(no, "O"); 
 		
-		while(!list.isEmpty()){
-			Node child = list.removeFirst();
-			
+		for(Node child : list ){
+					
 			 v = Math.max(v,minValue(child, alfa, beta));
 			 
 			 if(v >= alfa) 
@@ -64,9 +60,8 @@ public class AlfaBeta extends ConnectFour{
 		
 		list = Node.makedescendants(no, "O"); 
 		
-		while(!list.isEmpty()){
-			Node child = list.removeFirst();
-			
+		for(Node child : list ){
+						
 			 v = Math.min(v,maxValue(child, alfa, beta)); 
 			 
 			 if(v<=alfa) 
