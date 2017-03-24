@@ -67,7 +67,7 @@ public class AlfaBeta extends ConnectFour{
 		while(!list.isEmpty()){
 			Node child = list.removeFirst();
 			
-			 v = Math.max(v,maxValue(child, alfa, beta)); 
+			 v = Math.min(v,maxValue(child, alfa, beta)); 
 			 
 			 if(v<=alfa) 
 				 //momento da poda

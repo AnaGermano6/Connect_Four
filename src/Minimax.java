@@ -20,7 +20,7 @@ public class Minimax extends ConnectFour{
 			Node child = list.removeFirst();
 			
 			// calcula o valor da utilidade e depois guarda o valor
-            int val = Math.max(v,minValue(child)); 
+            int val = minValue(child); 
             
             if(val>v){
             	v=val;
@@ -46,7 +46,7 @@ public class Minimax extends ConnectFour{
 			Node child = list.removeFirst();
 			
 			// calcula o valor da utilidade e depois guarda o valor
-            v = Math.min(v,minValue(child));
+            v = Math.max(v, minValue(child));
           
         }		
 		return v;
@@ -67,7 +67,7 @@ public class Minimax extends ConnectFour{
 			Node child = list.removeFirst();
 		
 			// calcula o valor da utilidade e depois guarda o valor
-            v = Math.min(v,maxValue(child));
+            v = Math.min(v, maxValue(child));
         }
 		return v;
 		

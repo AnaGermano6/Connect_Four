@@ -49,6 +49,7 @@ public class Node extends ConnectFour{
 				//o j representa a coluna onde se vai colocar a peca
 				int linha = lastPosition(m.matriz, j);
 				Node filho = newMatriz(linha, j, m, simbolo);
+				print(filho);
 				descendentes.add(filho);					
 			}
 		}
@@ -66,7 +67,7 @@ public class Node extends ConnectFour{
 	//procura a ultima posicao preenchida
 	public static int lastPosition(String m[][], int col){
 		
-		for(int i=6; i<0; i--){
+		for(int i=6; i>0; i--){
 			if(m[i][col].equals("X") || m[i][col].equals("O"))
 				//posicao para colocar a peca
 				return i+1;
@@ -130,13 +131,13 @@ public class Node extends ConnectFour{
 		}
 
 		//verifica a utilidade das diagonais (\)
-		for(int i=0;i<3; i++){
+		for(int i=0; i<3; i++){
 		    for(int j=0; j<4; j++){
 		    	for(int k=0; k<4; k++){
 		    		if(m.matriz[i+k][j+k].equals("O")){
 		    			contaO++;
 		    		}
-		    		else if(m.matriz[i+k][j+4].equals("X")){
+		    		else if(m.matriz[i+k][j+k].equals("X")){
 		    			contaX++;
 		    		}
 		    	}
@@ -178,54 +179,58 @@ public class Node extends ConnectFour{
 		    return 0;
 	}
 
+	//verifica se o computador ganhou
 	public static boolean jaGanhei(Node m){
 
 		int contaX = 0;
-		
+		//na horizontal
 		for(int i=0; i<6; i++){
-	    	    for(int j=0; j<7; j++){
+    	    for(int j=0; j<7; j++){
 
-	    	    	if(m.matriz[i][j] == "X"){
-	    	    		contaX++;
-	    	    		if(contaX == 4){
-	    	    			return true;
-	    	    		}
-	    	    	}
-			else
-			    contaX = 0;
-		    }
-		    contaX = 0;
-		}
-
-		for(int j=0; j<7;j++){
-	    	    for(int i=0; i<6; i++){
-	    		
-	    	    	if(m.matriz[i][j] == "X"){
-	    	    		contaX++;
-	    	    		if(contaX == 4){
-	    	    			return true;
-	    	    		}
-	    	    	}
+    	    	if(m.matriz[i][j].equals("X")){
+    	    		contaX++;
+    	    		if(contaX == 4){
+    	    			return true;
+    	    		}
+    	    	}
 			else
 			    contaX = 0;
 		    }
 		    contaX = 0;
 		}
 		
+		//na vertical
+		for(int j=0; j<7;j++){
+    	    for(int i=0; i<6; i++){
+    		
+    	    	if(m.matriz[i][j].equals("X")){
+    	    		contaX++;
+    	    		if(contaX == 4){
+    	    			return true;
+    	    		}
+    	    	}
+			else
+			    contaX = 0;
+		    }
+		    contaX = 0;
+		}
+		
+		//na diagonal \
 		for(int i=0; i<3; i++){
 	    	for(int j=0; j<4; j++){
 
 	    		if(m.matriz[i][j].equals("X") && m.matriz[i+1][j+1].equals("X") && 
-	    				m.matriz[i-2][j+2].equals("X") && m.matriz[i-3][j+3].equals("X")){
+	    				m.matriz[i+2][j+2].equals("X") && m.matriz[i+3][j+3].equals("X")){
 	    			return true;
 	    		}
 		    }
 		}
 
+		//na diagonal /
 		for(int i=3; i<6; i++){
 	    	for(int j=0; j<4; j++){
 
-	    		if(m.matriz[i][j].equals("X") && m.matriz[i+1][j+1].equals("X") && 
+	    		if(m.matriz[i][j].equals("X") && m.matriz[i-1][j+1].equals("X") && 
 	    				m.matriz[i-2][j+2].equals("X") && m.matriz[i-3][j+3].equals("X")){
 	    			return true;
 	    		}
@@ -242,7 +247,7 @@ public class Node extends ConnectFour{
 		for(int i=0; i<6; i++){
 	   	    for(int j=0; j<7; j++){
 
-	   	    	if(m.matriz[i][j] == "O"){
+	   	    	if(m.matriz[i][j].equals("O")){
 	   	    		contaO++;
 	   	    		if(contaO == 4){
 	   	    			return true;
@@ -257,7 +262,7 @@ public class Node extends ConnectFour{
 		for(int j=0; j<7;j++){
 	        for(int i=0; i<6; i++){
 	    		
-	        	if(m.matriz[i][j] == "O"){
+	        	if(m.matriz[i][j].equals("O")){
 	        		contaO++;
 	        		if(contaO == 4){
 	        			return true;
@@ -273,7 +278,7 @@ public class Node extends ConnectFour{
 	    	for(int j=0; j<4; j++){
 
 	    		if(matriz[i][j].equals("O") && matriz[i+1][j+1].equals("O") && 
-	    				matriz[i-2][j+2].equals("O") && matriz[i-3][j+3].equals("O")){
+	    				matriz[i+2][j+2].equals("O") && matriz[i+3][j+3].equals("O")){
 	    			return true;
 	    		}
 		    }
@@ -282,7 +287,7 @@ public class Node extends ConnectFour{
 		for(int i=3; i<6; i++){
 	    	for(int j=0; j<4; j++){
 
-	    		if(matriz[i][j].equals("O") && matriz[i+1][j+1].equals("O") && 
+	    		if(matriz[i][j].equals("O") && matriz[i-1][j+1].equals("O") && 
 	    				matriz[i-2][j+2].equals("O") && matriz[i-3][j+3].equals("O")){
 	    			return true;
 	    		}
@@ -316,4 +321,14 @@ public class Node extends ConnectFour{
 
 		return false;
 	}
+	
+	 public static void print(Node m){
+	    	for(int i=0; i<6; i++){
+	    		for(int j=0; j<7; j++){
+	    			System.out.print(m.matriz[i][j]);
+	    		}
+	    		System.out.println();
+	    	}
+	    }
+
 }

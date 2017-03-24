@@ -33,7 +33,7 @@ public class Tabuleiro extends ConnectFour{
     		if(j == coluna-1){
     			for(i=5; i>=0; i--){
     				//confere se a coluna esta cheia
-    				if(matriz[i][j]!="X" && matriz[i][j]!="O"){
+    				if(!matriz[i][j].equals("X") && !matriz[i][j].equals("O")){
     					matriz[i][j] = simbolo;
     					break;
     				}
@@ -54,7 +54,7 @@ public class Tabuleiro extends ConnectFour{
 	
     	for(int i=0; i<6; i++){
     		for(int j=0; j<7; j++){
-    			if(matriz[i][j] != "-")
+    			if(!matriz[i][j].equals("-"))
     				contador++;
     		}
     	}
@@ -76,7 +76,7 @@ public class Tabuleiro extends ConnectFour{
     	for(int i=0; i<6; i++){
     	    for(int j=0; j<7; j++){
 
-    	    	if(matriz[i][j] == "O"){
+    	    	if(matriz[i][j].equals("O")){
     	    		contador1++;
     	    		contador2=0;
     	    		if(contador1 == 4){
@@ -85,7 +85,7 @@ public class Tabuleiro extends ConnectFour{
     	    		}
     	    	}
 
-    	    	else if(matriz[i][j] == "X"){
+    	    	else if(matriz[i][j].equals("X")){
     	    		contador2++;
     	    		contador1=0;
     	    		if(contador2 == 4){
@@ -107,7 +107,7 @@ public class Tabuleiro extends ConnectFour{
     	for(int j=0; j<7;j++){
     	    for(int i=0; i<6; i++){
     		
-    	    	if(matriz[i][j] == "O"){
+    	    	if(matriz[i][j].equals("O")){
     	    		contador1++;
     	    		contador2=0;
     	    		if(contador1 == 4){
@@ -116,7 +116,7 @@ public class Tabuleiro extends ConnectFour{
     	    		}
     	    	}
 
-    	    	else if(matriz[i][j] == "X"){
+    	    	else if(matriz[i][j].equals("X")){
     	    		contador2++;
     	    		contador1=0;
     	    		if(contador2 == 4){
@@ -145,7 +145,7 @@ public class Tabuleiro extends ConnectFour{
     	    	}
 
     	    	if(matriz[i][j].equals("X") && matriz[i+1][j+1].equals("X") && 
-    	    			matriz[i-2][j+2].equals("X") && matriz[i-3][j+3].equals("X")){
+    	    			matriz[i+2][j+2].equals("X") && matriz[i+3][j+3].equals("X")){
     	    		System.out.println("Ganhou o jogador 2!!");
 	    			return true;
     	    	}
