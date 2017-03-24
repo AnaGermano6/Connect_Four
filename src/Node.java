@@ -8,9 +8,10 @@ public class Node extends ConnectFour{
 	public Node pai;
 
 	
-	Node(String[][] child, int depth){
+	Node(String[][] child, int depth, int coluna){
 		this.matriz=child;
 		this.depth=depth;
+		this.coluna=coluna;
 		this.pai=null;
 	}
 	
@@ -100,10 +101,9 @@ public class Node extends ConnectFour{
 		
 		
 		child[x][y]=simbolo;
-		coluna=y;
 		
 		//adiciona mais 1 nivel ao no pai
-		Node copyM = new Node(child, m.depth+1);
+		Node copyM = new Node(child, m.depth+1, y);
 		copyM.pai=m;
 				
 		return copyM;

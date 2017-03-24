@@ -13,7 +13,7 @@ public class AlfaBeta extends ConnectFour{
 		int beta = MAIS_INF;
 		int v = MENOS_INF;
 		
-		Node n = new Node(m,0);
+		Node n = new Node(m,0,0);
 		
 		list = Node.makedescendants(n, "X");
 		
@@ -24,7 +24,7 @@ public class AlfaBeta extends ConnectFour{
 			
 			if(val>v){
             	v=val;
-            	col=Node.coluna;
+            //	col=Node.coluna;
             	
             }
         }
