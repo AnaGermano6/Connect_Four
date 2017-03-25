@@ -8,13 +8,13 @@ import java.util.*;
  */
 
 public class ConnectFour {
-	public static int escolha;
-	public static int adversario;
-	public static int jogador;
-	public static int inicia;
-	public static Tabuleiro tab;
+	private static int escolha;
+	private static int adversario;
+	private static int jogador;
+	private static int inicia;
+	private static Tabuleiro tab;
 	
-	public static void instrucoes(){
+	private static void instrucoes(){
 		Scanner stdin = new Scanner(System.in);
 		
 		System.out.print("Escolha o adversario que pretende enfrentar:\n" +
@@ -55,7 +55,6 @@ public class ConnectFour {
 		}
 		else{
 			System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
-			return;
 		}
 	}
 	
@@ -88,8 +87,13 @@ public class ConnectFour {
 		else{
 			if(inicia==1){//pessoa
 				while(true){
-				
+
 					jog1();
+					if(tab.quemGanhou() || tab.cheio()) {
+						System.out.println("Acabou o jogo!");
+						break;
+					}
+					System.out.println("########Jogada Oponente#########");
 					computer();
 					
 					if(tab.quemGanhou() || tab.cheio()) {
@@ -101,8 +105,14 @@ public class ConnectFour {
 				
 			}else if(inicia==2){//computador
 				while(true){
-				
+					System.out.println("########Jogada Oponente#########");
 					computer();
+
+					if(tab.quemGanhou() || tab.cheio()) {
+						System.out.println("Acabou o jogo!");
+						break;
+					}
+
 					jog1();	
 					
 					if(tab.quemGanhou() || tab.cheio()) {
@@ -113,13 +123,12 @@ public class ConnectFour {
 			}
 			else{
 				System.out.println("Nao intruduziu um valor correcto, por favor intruduza o numero 1 ou o numero 2");
-				return; 
 			}
 		}
 	}
 	
 	//vez de jogar o jogador1
-	public static void jog1(){
+	private static void jog1(){
 		Scanner stdin = new Scanner(System.in);
 		
 		System.out.println("Insira a coluna onde pretende jogar, jogador 1");
@@ -142,14 +151,16 @@ public class ConnectFour {
 
 		else {
 		    tab.altera("O", coluna);
+
 		    tab.print();
+
 		}
 		
 	 }
 	
 	
 	//vez de jogar o jogador 2
-	public static void jog2(){
+	private static void jog2(){
 		Scanner stdin = new Scanner(System.in);
 
 		System.out.println("Insira a coluna onde pretende jogar, jogador 2");
@@ -173,23 +184,26 @@ public class ConnectFour {
 		else {
 		    tab.altera("X", coluna);
 		    tab.print();
+			System.out.println("########Jogada Oponente#########");
 		}
 	}
 	
 	//vez do computador jogar
-	public static void computer(){
+	private static void computer(){
 		int play;
-		//System.out.println("escolha " + escolha);
+		Minimax minmax = new Minimax();
 		//escolha dos algoritmos
 		if(escolha==1){ //Minimax
-			play = Minimax.decisionMinimax(tab.matriz);
+			play = minmax.decisionMinimax(tab.matriz);
 			tab.altera("X", play);
 			tab.print();
 		}
 		else{ //AlfaBeta
-			//play = AlfaBeta.alphaBetaSearch(tab.matriz);
-			//tab.altera("X", play);
-			//tab.print();
+			AlfaBeta alfaBeta = new AlfaBeta();
+			play = alfaBeta.alphaBetaSearch(tab.matriz);
+			tab.altera("X", play);
+			tab.print();
+
 							
 		}
 		

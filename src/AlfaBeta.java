@@ -3,46 +3,58 @@ import java.util.LinkedList;
 public class AlfaBeta extends ConnectFour{
 	private final static int MAIS_INF = Integer.MAX_VALUE;
 	private final static int MENOS_INF = Integer.MIN_VALUE;
-	public static LinkedList<Node> list = new LinkedList<Node>();
+
 	
 	//execucao do alfa-beta
-	public static int alphaBetaSearch(String[][] m){
+	public int alphaBetaSearch(String[][] m){
 		int col=0;
-		
+		LinkedList<Node> list;
 		int alfa = MENOS_INF;
 		int beta = MAIS_INF;
 		int v = MENOS_INF;
 		
 		Node n = new Node(m,0,0,0);
 		
-		list = Node.makedescendants(n, "X");
+		list = n.makedescendants(n, "X");
 		
 		for(Node child : list ){
-						
-			int val = maxValue(child, alfa, beta);
-			
-			if(val>v){
-            	v=val;
-            }
+			v = Math.max(v, minValue(child,alfa,beta));
+			child.utilidade = v;
+
+			if(v >= beta)
+				break;
+			alfa = Math.max(v,alfa);
         }
+
+        for(Node child : list){
+			if(child.utilidade==v){
+				return child.getColuna()+1;
+			}
+
+		}
 		return col;
 	}
 	
 	//calcula o max
-	public static int maxValue(Node no, int alfa, int beta){
+	private int maxValue(Node no, int alfa, int beta){
 		int v = MENOS_INF;
-		
+
 		//terminal
-		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
-			return Node.utility(no);
-		
-		list = Node.makedescendants(no, "O"); 
-		
-		for(Node child : list ){
+		if(no.jaGanhei(no))
+			return 512;
+		if(no.jaPerdi(no))
+			return -512;
+		if(no.haEmpate(no))
+			return 0;
+		if(!no.isFinal(no)){
+			return no.utility(no);
+		}
+		LinkedList<Node> filhosGerados =  no.makedescendants(no, "X");
+		for(Node child : filhosGerados){
 					
 			 v = Math.max(v,minValue(child, alfa, beta));
-			 
-			 if(v >= alfa) 
+			 child.utilidade = v;
+			 if(v >= beta)
 				 //momento da poda
 				 return v;
 			 alfa  = Math.max(alfa, v);
@@ -51,18 +63,24 @@ public class AlfaBeta extends ConnectFour{
 	}
 	
 	//calcula min
-	public static int minValue(Node no, int alfa, int beta){
+	private int minValue(Node no, int alfa, int beta){
 		int v = MAIS_INF;
-		
+
 		//terminal
-		if((Node.jaGanhei(no)) || (Node.jaPerdi(no)) || (Node.haEmpate(no)) || (Node.isFinal(no)))
-			return Node.utility(no);
-		
-		list = Node.makedescendants(no, "O"); 
-		
-		for(Node child : list ){
-						
-			 v = Math.min(v,maxValue(child, alfa, beta)); 
+		if(no.jaGanhei(no))
+			return 512;
+		if(no.jaPerdi(no))
+			return -512;
+		if(no.haEmpate(no))
+			return 0;
+		if(!no.isFinal(no)){
+			return no.utility(no);
+		}
+
+		LinkedList<Node> filhosGerados =  no.makedescendants(no, "O");
+		for(Node child : filhosGerados){
+			 v = Math.min(v,maxValue(child, alfa, beta));
+			 child.utilidade = v;
 			 
 			 if(v<=alfa) 
 				 //momento da poda

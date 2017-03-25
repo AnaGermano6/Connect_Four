@@ -156,8 +156,6 @@ public class Tabuleiro extends ConnectFour{
     	//verifica se ganhou noutra diagonal (/)
     	for(int i=3; i<6; i++){
     	    for(int j=0; j<4; j++){
-    	    	
-    	    	
     	    	if(matriz[i][j].equals("O") && matriz[i-1][j+1].equals("O") && 
     	    			matriz[i-2][j+2].equals("O") && matriz[i-3][j+3].equals("O")){
     	    			System.out.println("Ganhou o jogador 1!!");

@@ -3,8 +3,8 @@ import java.util.*;
 public class Node extends ConnectFour{
 	//lista dos descendentes do tabuleiro
 	private String matriz[][];
-	public static int coluna;
-	public static int utilidade;
+	public int coluna;
+	public int utilidade;
 	public int depth;
 	public Node pai;
 
@@ -26,21 +26,6 @@ public class Node extends ConnectFour{
 		return coluna;
 	}
 
-	public void setColuna(int coluna) {
-		this.coluna = coluna;
-	}
-
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	public void setMatriz(String[][] matriz) {
-		this.matriz = matriz;
-	}
 
 	public String[][] getMatriz(){
 		String [][] res = new String[6][];
@@ -50,7 +35,7 @@ public class Node extends ConnectFour{
 	}
 		
 	//cria os descendentes
-	public static LinkedList<Node> makedescendants(Node m, String simbolo){
+	public LinkedList<Node> makedescendants(Node m, String simbolo){
 		LinkedList<Node> descendentes = new LinkedList<Node>();
 		int linha;
 		for(int j=0; j<7; j++){
@@ -71,7 +56,7 @@ public class Node extends ConnectFour{
 	}
 	
 	//verifica se a coluna esta cheia
-	public static boolean isColFull(String m[][], int col){
+	public boolean isColFull(String m[][], int col){
 		//ultima linha fixa 
 		if(m[0][col].equals("X") || m[0][col].equals("O"))
 			return true;
@@ -79,7 +64,7 @@ public class Node extends ConnectFour{
 	}
 	
 	//procura a ultima posicao preenchida
-	public static int lastPosition(String m[][], int col){
+	public  int lastPosition(String m[][], int col){
 		
 		for(int i=5; i>=0; i--){
 			if(!m[i][col].equals("X") && !m[i][col].equals("O"))
@@ -91,7 +76,7 @@ public class Node extends ConnectFour{
 	
 	
 	//troca o "-" pela jogadas
-	public static Node newMatriz(int x, int y, Node m, String simbolo){
+	public  Node newMatriz(int x, int y, Node m, String simbolo){
 		String[][] child= new String[6][7];
 		
 		//cria a nova matriz igual a anterior
@@ -105,14 +90,14 @@ public class Node extends ConnectFour{
 		child[x][y]=simbolo;
 		
 		//adiciona mais 1 nivel ao no pai
-		Node copyM = new Node(child, m.depth+1, y, utilidade);
+		Node copyM = new Node(child, m.depth+1, y, 0);
 		copyM.pai=m;
 				
 		return copyM;
 	}
 	
 	
-	public static int utility(Node m){
+	public  int utility(Node m){
 		int contaX=0, contaO=0, sum=0;
 
 		//verifica a utilidade das linhas
@@ -122,9 +107,9 @@ public class Node extends ConnectFour{
     	    		if(m.matriz[i][j+k].equals("O")){
     	    			contaO++;
     	    		}
-    	    		else if(m.matriz[i][j+k].equals("X")){
-    	    			contaX++;
-    	    		}
+					else if(m.matriz[i][j+k].equals("X")) {
+						contaX++;
+					}
     	    	}
     	    	sum+= soma(contaX, contaO);
     	    	contaX=0;
@@ -177,15 +162,15 @@ public class Node extends ConnectFour{
 		    			contaX++;
 		    		}
 		    	}
-			sum+= soma(contaX, contaO);
-	    	contaX=0;
-	    	contaO=0;
+				sum+= soma(contaX, contaO);
+				contaX=0;
+	    		contaO=0;
 		    }
 		}
 		return sum;
 	}
 
-	public static int soma(int contadorX, int contadorO){
+	public  int soma(int contadorX, int contadorO){
 		if(contadorX == 3 && contadorO == 0)
 		    return 50;
 		else if(contadorO == 3 && contadorX == 0)
@@ -203,7 +188,7 @@ public class Node extends ConnectFour{
 	}
 
 	//verifica se o computador ganhou
-	public static boolean jaGanhei(Node m){
+	public boolean jaGanhei(Node m){
 
 		int contaX = 0;
 		//na horizontal
@@ -263,7 +248,7 @@ public class Node extends ConnectFour{
 	 }
 
 	//quando o computador perde
-	 public static boolean jaPerdi(Node m){
+	 public  boolean jaPerdi(Node m){
 
 		int contaO = 0;
 		//horizontais
@@ -320,7 +305,7 @@ public class Node extends ConnectFour{
 	}
 
 	//confirmar se aqui retorna um inteiro ou um booleano
-	public static boolean haEmpate(Node m){
+	public  boolean haEmpate(Node m){
 		int contador = 0;
 		
     	for(int i=0; i<6; i++){
@@ -338,19 +323,12 @@ public class Node extends ConnectFour{
 	}
 	
 	
-	public static boolean isFinal(Node matriz){
-		if(matriz.depth == 3)
+	public  boolean isFinal(Node matriz){
+		if(matriz.depth == 8)
 		    return true;
 
 		return false;
 	}
 	
-	 public static void printM(Node m){
-    	for(int i=0; i<6; i++){
-    		for(int j=0; j<7; j++){
-    			System.out.print(m.matriz[i][j]);
-    		}
-    		System.out.println();
-    	}
-    }
+
 }
