@@ -44,8 +44,7 @@ public class Minimax extends ConnectFour{
 			return -512;
 		if(no.haEmpate(no))
 			return 0;
-		if(!no.isFinal(no)){
-
+		if(no.isFinal(no)){
 			return no.utility(no);
 		}
 
@@ -72,7 +71,7 @@ public class Minimax extends ConnectFour{
 			return -512;
 		if(no.haEmpate(no))
 			return 0;
-		if(!no.isFinal(no)){
+		if(no.isFinal(no)){
 			return no.utility(no);
 		}
 

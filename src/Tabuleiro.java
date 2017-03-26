@@ -21,6 +21,8 @@ public class Tabuleiro extends ConnectFour{
     		}
     		System.out.println();
     	}
+	System.out.println("1234567");
+	System.out.println();
     }
 
     
@@ -89,8 +91,15 @@ public class Tabuleiro extends ConnectFour{
     	    		contador2++;
     	    		contador1=0;
     	    		if(contador2 == 4){
+			    if(adversario==1){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;
+			    }
+			    else{
+				System.out.println("Ganhou o computador!!");
+    	    			return true;
+			    }
+				
     	    		}
     	    	}
     		
@@ -120,8 +129,14 @@ public class Tabuleiro extends ConnectFour{
     	    		contador2++;
     	    		contador1=0;
     	    		if(contador2 == 4){
+			    if(adversario == 1){
     	    			System.out.println("Ganhou o jogador 2!!");
     	    			return true;
+			    }
+			    else{
+				System.out.println("Ganhou o computador!!");
+    	    			return true;
+			    }
     	    		}
     	    	}
     		
@@ -146,11 +161,16 @@ public class Tabuleiro extends ConnectFour{
 
     	    	if(matriz[i][j].equals("X") && matriz[i+1][j+1].equals("X") && 
     	    			matriz[i+2][j+2].equals("X") && matriz[i+3][j+3].equals("X")){
+		    if(adversario==1){
     	    		System.out.println("Ganhou o jogador 2!!");
-	    			return true;
+			return true;
+		    }
+		    else {
+			System.out.println("Ganhou o computador!!");
+			return true;
+		    }			
     	    	}
     	    } 
-    	    
     	}
 
     	//verifica se ganhou noutra diagonal (/)
@@ -164,12 +184,19 @@ public class Tabuleiro extends ConnectFour{
 
     	    	if(matriz[i][j].equals("X") && matriz[i-1][j+1].equals("X") && 
     	    			matriz[i-2][j+2].equals("X") && matriz[i-3][j+3].equals("X")){
-    	    			System.out.println("Ganhou o jogador 2!!");
-    	    			return true;
-    	    	}
+    	    	if(adversario==1){
+    	    		System.out.println("Ganhou o jogador 2!!");
+			return true;
+		    }
+		    else {
+			System.out.println("Ganhou o computador!!");
+			return true;
+		    }
     	    
-    	    }
-    	}
+		}
+	    }
+	}
+	
     	return false;
     }  
 }

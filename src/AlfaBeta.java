@@ -46,7 +46,7 @@ public class AlfaBeta extends ConnectFour{
 			return -512;
 		if(no.haEmpate(no))
 			return 0;
-		if(!no.isFinal(no)){
+		if(no.isFinal(no)){
 			return no.utility(no);
 		}
 		LinkedList<Node> filhosGerados =  no.makedescendants(no, "X");
@@ -73,7 +73,7 @@ public class AlfaBeta extends ConnectFour{
 			return -512;
 		if(no.haEmpate(no))
 			return 0;
-		if(!no.isFinal(no)){
+		if(no.isFinal(no)){
 			return no.utility(no);
 		}
 

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ConnectFour {
 	private static int escolha;
-	private static int adversario;
+	public static int adversario;
 	private static int jogador;
 	private static int inicia;
 	private static Tabuleiro tab;
@@ -105,7 +105,10 @@ public class ConnectFour {
 				
 			}else if(inicia==2){//computador
 				while(true){
+				    
 					System.out.println("########Jogada Oponente#########");
+					System.out.println();
+					
 					computer();
 
 					if(tab.quemGanhou() || tab.cheio()) {
