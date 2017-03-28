@@ -93,7 +93,7 @@ public class ConnectFour {
 						System.out.println("Acabou o jogo!");
 						break;
 					}
-					System.out.println("########Jogada Oponente#########");
+					System.out.println("#####Jogada Oponente#####");
 					computer();
 					
 					if(tab.quemGanhou() || tab.cheio()) {
@@ -106,7 +106,7 @@ public class ConnectFour {
 			}else if(inicia==2){//computador
 				while(true){
 				    
-					System.out.println("########Jogada Oponente#########");
+					System.out.println("#####Jogada Oponente#####");
 					System.out.println();
 					
 					computer();
@@ -133,8 +133,12 @@ public class ConnectFour {
 	//vez de jogar o jogador1
 	private static void jog1(){
 		Scanner stdin = new Scanner(System.in);
-		
-		System.out.println("Insira a coluna onde pretende jogar, jogador 1");
+
+		if(adversario == 1)
+		    System.out.println("Insira a coluna onde pretende jogar, jogador 1");
+
+		else
+		    System.out.println("Insira a coluna onde pretende jogar");
 				
 		int coluna = stdin.nextInt();
 
@@ -187,7 +191,7 @@ public class ConnectFour {
 		else {
 		    tab.altera("X", coluna);
 		    tab.print();
-			System.out.println("########Jogada Oponente#########");
+			System.out.println("#####Jogada Oponente#####");
 		}
 	}
 	
@@ -195,6 +199,9 @@ public class ConnectFour {
 	private static void computer(){
 		int play;
 		Minimax minmax = new Minimax();
+
+		long comeca = System.currentTimeMillis();		
+
 		//escolha dos algoritmos
 		if(escolha==1){ //Minimax
 			play = minmax.decisionMinimax(tab.matriz);
@@ -205,11 +212,11 @@ public class ConnectFour {
 			AlfaBeta alfaBeta = new AlfaBeta();
 			play = alfaBeta.alphaBetaSearch(tab.matriz);
 			tab.altera("X", play);
-			tab.print();
-
-							
+			tab.print();					
 		}
-		
-			
+
+		long acaba = System.currentTimeMillis();
+
+		System.out.println("Tempo de execução: " + (double)(acaba - comeca) + " ms\n");
 	}
 }

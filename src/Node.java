@@ -324,7 +324,7 @@ public class Node extends ConnectFour{
 	
 	
 	public  boolean isFinal(Node matriz){
-		if(matriz.depth == 5)
+		if(matriz.depth == 6)
 		    return true;
 
 		return false;
